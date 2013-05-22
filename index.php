@@ -1,6 +1,6 @@
 <?PHP
     
-if($_POST["content"]) {
+if(isset($_POST["content"])) {
     $handle = fopen ("data", "w");
     $content = fwrite($handle, stripslashes($_POST["content"]) );
     fclose ($handle);
@@ -26,52 +26,28 @@ if(file_exists("data")) {
             var isCtrl = false;
             
             window.onload = function() {
-                // make editor fullscreen
+            
+                CKEDITOR.replace( 'doc', {
+                    fullPage: true,
+                    language: 'de',
+                    toolbar: [
+                        { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'Print' ] },
+                        { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+                        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+                        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
+                        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+                        { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+                        { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak' ] },
+                        { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+                        { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+                        { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] }
+                    ]
+                });
+                
                 CKEDITOR.on('instanceReady', function(editorInstance) {
                     editorInstance.editor.execCommand('maximize');
                 });
-            
-                // initialize editor
-                CKEDITOR.replace('content', {
-                    toolbar: 'MyToolbar',
-                    extraPlugins : 'uicolor',
-                    uiColor: '#E2E7E1',
-                    toolbar_MyToolbar: [
-                            ['Save','NewPage','Preview'],
-                            ['Cut','Copy','Paste','PasteText','-','Print', 'SpellChecker', 'Scayt'],
-                            ['Undo','Redo','-','Find','Replace'],
-                            [,'-','Outdent','Indent','Blockquote'],
-                            ['Link','Unlink'],
-                            ['Table','HorizontalRule','SpecialChar'],
-                            ['Maximize', 'ShowBlocks','-','Source'],
-                            '/',
-                            ['Bold','Italic','Underline','Strike'],
-                            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','NumberedList','BulletedList'],
-                            ['Styles','Format','Font','FontSize'],
-                            ['TextColor','BGColor']
-                        ],
-                    keystrokes: [
-                        [ CKEDITOR.ALT + 121 /*F10*/, 'toolbarFocus' ],
-                        [ CKEDITOR.ALT + 122 /*F11*/, 'elementsPathFocus' ],
-
-                        [ CKEDITOR.SHIFT + 121 /*F10*/, 'contextMenu' ],
-
-                        [ CKEDITOR.CTRL + 90 /*Z*/, 'undo' ],
-                        [ CKEDITOR.CTRL + 89 /*Y*/, 'redo' ],
-                        [ CKEDITOR.CTRL + CKEDITOR.SHIFT + 90 /*Z*/, 'redo' ],
-
-                        [ CKEDITOR.CTRL + 76 /*L*/, 'link' ],
-
-                        [ CKEDITOR.CTRL + 66 /*B*/, 'bold' ],
-                        [ CKEDITOR.CTRL + 73 /*I*/, 'italic' ],
-                        [ CKEDITOR.CTRL + 85 /*U*/, 'underline' ],
-
-                        [ CKEDITOR.ALT + 109 /*-*/, 'toolbarCollapse' ],
-                        [ CKEDITOR.ALT + 83 /*S*/, 'save' ]
-                    ]
-                });
             };
-            
             
         </script>
         
@@ -81,8 +57,8 @@ if(file_exists("data")) {
 
     <body>
 
-    <form action="index.php" method="post" id="doc">
-        <textarea name="content"><?= $content ?></textarea>
+    <form action="index.php" method="post" id="docf">
+        <textarea id="doc" name="content" rows="10" cols="100"><?= $content ?></textarea>
     </form>
     
     </body>
