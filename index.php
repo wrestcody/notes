@@ -41,6 +41,25 @@ if(file_exists("data")) {
                         { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
                         { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
                         { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] }
+                    ],
+                    keystrokes: [
+                        [ CKEDITOR.ALT + 121 /*F10*/, 'toolbarFocus' ],
+                        [ CKEDITOR.ALT + 122 /*F11*/, 'elementsPathFocus' ],
+
+                        [ CKEDITOR.SHIFT + 121 /*F10*/, 'contextMenu' ],
+
+                        [ CKEDITOR.CTRL + 90 /*Z*/, 'undo' ],
+                        [ CKEDITOR.CTRL + 89 /*Y*/, 'redo' ],
+                        [ CKEDITOR.CTRL + CKEDITOR.SHIFT + 90 /*Z*/, 'redo' ],
+
+                        [ CKEDITOR.CTRL + 76 /*L*/, 'link' ],
+
+                        [ CKEDITOR.CTRL + 66 /*B*/, 'bold' ],
+                        [ CKEDITOR.CTRL + 73 /*I*/, 'italic' ],
+                        [ CKEDITOR.CTRL + 85 /*U*/, 'underline' ],
+
+                        [ CKEDITOR.ALT + 109 /*-*/, 'toolbarCollapse' ],
+                        [ CKEDITOR.ALT + 83 /*S*/, 'save' ]
                     ]
                 });
                 
